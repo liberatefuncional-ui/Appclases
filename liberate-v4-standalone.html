@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2F6EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#080F0B" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Liberate — prototipo v4. Entrenamiento al aire libre con tu grupo.">
+<title>Liberate — Prototipo v4</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   Liberate v4 · design tokens
+   Dirección: "verde editorial + glass" — papel verde suave,
+   tarjetas de vidrio, tipografía serif para títulos y
+   pixel-font sólo como firma de marca.
+   ========================================================= */
+
+:root{
+  /* superficies */
+  --bg:            #F2F6EC;
+  --bg-glow-1:     rgba(198,242,107,.42);
+  --bg-glow-2:     rgba(110,196,178,.20);
+  --surface:       #FFFFFF;
+  --surface-2:     #F6FAF1;
+  --surface-3:     #EDF3E5;
+  --glass:         rgba(255,255,255,.66);
+  --glass-strong:  rgba(255,255,255,.88);
+  --glass-brd:     rgba(255,255,255,.85);
+
+  /* tinta */
+  --ink:           #0D1710;
+  --ink-2:         #2C4135;
+  --muted:         #6A7D70;
+  --line:          rgba(13,23,16,.085);
+  --line-2:        rgba(13,23,16,.16);
+
+  /* marca */
+  --acc:           #1B7A44;
+  --acc-2:         #2AA45C;
+  --acc-ink:       #FFFFFF;
+  --acc-soft:      #DFF4E4;
+  --lime:          #C6F26B;
+
+  /* estados */
+  --ok:            #15803D;  --ok-bg:   #DCF5E3;
+  --no:            #BE3A2B;  --no-bg:   #FBE5E1;
+  --wa:            #A96A05;  --wa-bg:   #FCEFD3;
+  --wa-green:      #25A244;
+
+  /* sombras */
+  --sh-s: 0 1px 2px rgba(13,23,16,.05), 0 2px 6px rgba(13,23,16,.04);
+  --sh-m: 0 2px 6px rgba(13,23,16,.05), 0 14px 30px -14px rgba(13,23,16,.22);
+  --sh-l: 0 4px 12px rgba(13,23,16,.06), 0 28px 56px -24px rgba(13,23,16,.30);
+
+  /* radios */
+  --r-xs: 8px;
+  --r-s:  12px;
+  --r-m:  16px;
+  --r-l:  22px;
+  --r-xl: 30px;
+
+  /* tipografía */
+  --f-ui:   'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-disp: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --f-px:   'Press Start 2P', ui-monospace, monospace;
+
+  /* layout */
+  --maxw:   440px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --nav-h:  78px;
+}
+
+/* ---------- tema oscuro ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#080F0B;
+    --bg-glow-1: rgba(42,164,92,.14);
+    --bg-glow-2: rgba(60,140,160,.10);
+    --surface:#121D16;
+    --surface-2:#16241B;
+    --surface-3:#1B2C21;
+    --glass: rgba(24,38,29,.66);
+    --glass-strong: rgba(20,33,25,.90);
+    --glass-brd: rgba(255,255,255,.09);
+    --ink:#EDF5EA;
+    --ink-2:#C6D8C8;
+    --muted:#93A897;
+    --line:rgba(255,255,255,.09);
+    --line-2:rgba(255,255,255,.18);
+    --acc:#4FC97D;
+    --acc-2:#6BE096;
+    --acc-ink:#06120A;
+    --acc-soft:#13301D;
+    --ok:#5FD98A; --ok-bg:#12301F;
+    --no:#FF8474; --no-bg:#341A17;
+    --wa:#F0B955; --wa-bg:#33280F;
+    --sh-s: 0 1px 2px rgba(0,0,0,.5);
+    --sh-m: 0 2px 8px rgba(0,0,0,.45), 0 16px 34px -16px rgba(0,0,0,.7);
+    --sh-l: 0 4px 14px rgba(0,0,0,.5), 0 30px 60px -26px rgba(0,0,0,.85);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#080F0B;
+  --bg-glow-1: rgba(42,164,92,.14);
+  --bg-glow-2: rgba(60,140,160,.10);
+  --surface:#121D16;
+  --surface-2:#16241B;
+  --surface-3:#1B2C21;
+  --glass: rgba(24,38,29,.66);
+  --glass-strong: rgba(20,33,25,.90);
+  --glass-brd: rgba(255,255,255,.09);
+  --ink:#EDF5EA;
+  --ink-2:#C6D8C8;
+  --muted:#93A897;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.18);
+  --acc:#4FC97D;
+  --acc-2:#6BE096;
+  --acc-ink:#06120A;
+  --acc-soft:#13301D;
+  --ok:#5FD98A; --ok-bg:#12301F;
+  --no:#FF8474; --no-bg:#341A17;
+  --wa:#F0B955; --wa-bg:#33280F;
+  --sh-s: 0 1px 2px rgba(0,0,0,.5);
+  --sh-m: 0 2px 8px rgba(0,0,0,.45), 0 16px 34px -16px rgba(0,0,0,.7);
+  --sh-l: 0 4px 14px rgba(0,0,0,.5), 0 30px 60px -26px rgba(0,0,0,.85);
+}
+
+</style>
+<style>
+/* =========================================================
+   Liberate v4 · base
+   ========================================================= */
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:var(--f-ui);
+  font-size:15px;
+  line-height:1.45;
+  color:var(--ink);
+  background:
+    radial-gradient(120% 62% at 8% -6%, var(--bg-glow-1), transparent 62%),
+    radial-gradient(90% 55% at 102% 2%, var(--bg-glow-2), transparent 58%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  justify-content:center;
+  padding-top:var(--safe-t);
+  padding-bottom:var(--safe-b);
+  overflow-x:hidden;
+}
+
+#app{
+  width:100%;
+  max-width:var(--maxw);
+  position:relative;
+  isolation:isolate;
+}
+
+button{ font:inherit; color:inherit; }
+a{ color:inherit; }
+img,canvas,svg{ display:block; }
+svg{ flex:none; }
+
+h1,h2,h3,p,figure{ margin:0; }
+
+/* ---------- tipografía ---------- */
+h1,h2{ font-family:var(--f-disp); font-weight:400; letter-spacing:-.015em; line-height:1.04; }
+h1{ font-size:34px; }
+h2{ font-size:26px; }
+h3{ font-size:15px; font-weight:800; letter-spacing:-.005em; }
+
+.serif{ font-family:var(--f-disp); font-weight:400; letter-spacing:-.015em; }
+.pixel{ font-family:var(--f-px); letter-spacing:0; }
+.xl{ font-size:31px; }
+
+.eyebrow{
+  font-size:11px; font-weight:800; text-transform:uppercase;
+  letter-spacing:.10em; color:var(--muted);
+}
+.sub{ font-size:13.5px; color:var(--muted); line-height:1.5; }
+.hint{ font-size:12.5px; color:var(--muted); text-align:center; margin-top:12px; line-height:1.5; }
+.note{ font-size:12px; color:var(--muted); text-align:center; margin-top:16px; line-height:1.55; }
+.mu{ color:var(--muted); }
+
+/* ---------- utilidades ---------- */
+.row-between{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.stack > * + *{ margin-top:12px; }
+.center{ text-align:center; }
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+/* ---------- entrada de pantalla ---------- */
+@keyframes rise{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:none; }
+}
+@keyframes pop{
+  from{ opacity:0; transform:scale(.96); }
+  to{ opacity:1; transform:none; }
+}
+.is-enter .screen{ animation:rise .42s cubic-bezier(.22,.9,.28,1) both; }
+.is-enter .card,
+.is-enter .sheet{ animation:pop .38s cubic-bezier(.22,.9,.28,1) both; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+}
+
+/* modo captura: sin animaciones ni transiciones */
+html.static *,
+html.static *::before,
+html.static *::after{ animation:none !important; transition:none !important; }
+html.static .is-enter .screen{ opacity:1; transform:none; }
+html.static body{ min-height:auto; }
+
+</style>
+<style>
+/* =========================================================
+   Liberate v4 · componentes
+   ========================================================= */
+
+/* ---------- app bar ---------- */
+.appbar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:16px 18px 8px;
+}
+.logo{ font-family:var(--f-px); font-size:12px; color:var(--ink); }
+.logo span{ color:var(--acc-2); }
+
+.role-btn{
+  display:inline-flex; align-items:center; gap:7px;
+  padding:9px 12px; border-radius:12px; cursor:pointer;
+  font-family:var(--f-px); font-size:6.5px; line-height:1.3;
+  color:var(--ink); background:var(--glass);
+  border:1px solid var(--line-2);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  transition:transform .15s ease, background .2s;
+}
+.role-btn:active{ transform:scale(.96); }
+.role-btn svg{ width:13px; height:13px; }
+
+/* ---------- botones ---------- */
+.btn{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; min-height:54px; padding:15px 18px;
+  border-radius:var(--r-m); border:1.5px solid var(--line);
+  background:var(--surface-2); color:var(--ink);
+  font-size:15.5px; font-weight:750; letter-spacing:-.005em;
+  cursor:pointer; text-align:center; text-decoration:none;
+  transition:transform .14s ease, box-shadow .22s, background .22s, color .22s, border-color .22s;
+}
+.btn:active{ transform:scale(.977); }
+.btn--acc{
+  background:linear-gradient(158deg, var(--acc-2), var(--acc));
+  color:var(--acc-ink); border-color:transparent;
+  box-shadow:0 10px 26px -12px rgba(27,122,68,.75);
+}
+.btn--ok{
+  background:linear-gradient(158deg, #37b06a, var(--ok));
+  color:#fff; border-color:transparent;
+  box-shadow:0 10px 26px -12px rgba(21,128,61,.75);
+}
+.btn--no{
+  background:linear-gradient(158deg, #d9503f, var(--no));
+  color:#fff; border-color:transparent;
+  box-shadow:0 10px 26px -12px rgba(190,58,43,.7);
+}
+.btn--wa{
+  background:var(--wa-green); color:#fff; border-color:transparent;
+  box-shadow:0 10px 26px -12px rgba(37,162,68,.6);
+}
+.btn--ghost{ background:var(--glass); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); }
+.btn--sm{ min-height:44px; padding:11px 14px; font-size:13.5px; border-radius:13px; }
+.btn--danger-ghost{ color:var(--no); border-color:color-mix(in srgb, var(--no) 28%, transparent); }
+
+/* ---------- pills ---------- */
+.pill{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:5px 11px; border-radius:99px;
+  font-size:11.5px; font-weight:800; letter-spacing:.01em; white-space:nowrap;
+}
+.pill::before{
+  content:''; width:5px; height:5px; border-radius:99px;
+  background:currentColor; opacity:.9;
+}
+.pill--ok{ background:var(--ok-bg); color:var(--ok); }
+.pill--no{ background:var(--no-bg); color:var(--no); }
+.pill--wa{ background:var(--wa-bg); color:var(--wa); }
+.pill--mute{ background:var(--surface-3); color:var(--muted); }
+.pill--acc{ background:var(--acc-soft); color:var(--acc); }
+.pill--bare::before{ display:none; }
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-l);
+  padding:16px;
+  box-shadow:var(--sh-s);
+}
+.card + .card{ margin-top:12px; }
+.card--glass{
+  background:var(--glass);
+  border-color:var(--glass-brd);
+  -webkit-backdrop-filter:blur(22px) saturate(1.4);
+  backdrop-filter:blur(22px) saturate(1.4);
+  box-shadow:var(--sh-m);
+}
+.card--flat{ box-shadow:none; background:var(--surface-2); }
+.card-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+
+/* ---------- secciones de página ---------- */
+.page{ padding-bottom:calc(var(--nav-h) + 26px); }
+.page-head{ padding:8px 18px 14px; }
+.page-head h1{ margin-bottom:4px; }
+.page-body{ padding:0 14px; }
+
+/* ---------- filas de lista ---------- */
+.list{ display:flex; flex-direction:column; }
+.item{
+  display:flex; align-items:center; gap:12px;
+  padding:12px 0; border-top:1px solid var(--line);
+}
+.item:first-child{ border-top:0; padding-top:2px; }
+.item:last-child{ padding-bottom:2px; }
+.item-main{ flex:1; min-width:0; }
+.item-title{ font-weight:750; font-size:14.5px; letter-spacing:-.005em; }
+.item-sub{ font-size:12.5px; color:var(--muted); margin-top:1px; }
+
+.day-badge{
+  display:grid; place-items:center; flex:none;
+  width:44px; height:46px; border-radius:13px;
+  background:var(--surface-3); color:var(--ink-2);
+}
+.day-badge b{ font-size:15px; font-weight:800; line-height:1; }
+.day-badge span{ font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; opacity:.7; margin-top:2px; }
+.day-badge.is-today{ background:linear-gradient(158deg, var(--acc-2), var(--acc)); color:var(--acc-ink); }
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed; left:50%; bottom:calc(var(--nav-h) + 26px + var(--safe-b));
+  transform:translate(-50%, 12px);
+  max-width:min(88vw, 340px);
+  padding:13px 18px; border-radius:15px;
+  background:var(--ink); color:var(--bg);
+  font-size:13.5px; font-weight:650; text-align:center; line-height:1.4;
+  box-shadow:var(--sh-m);
+  opacity:0; pointer-events:none; z-index:90;
+  transition:opacity .26s, transform .26s cubic-bezier(.22,.9,.28,1);
+}
+.toast.s{ opacity:1; transform:translate(-50%, 0); }
+
+/* ---------- nav inferior flotante ---------- */
+.nav{
+  position:fixed; left:50%; bottom:calc(10px + var(--safe-b));
+  transform:translateX(-50%);
+  width:calc(100% - 22px); max-width:calc(var(--maxw) - 12px);
+  display:flex; gap:3px; padding:7px;
+  border-radius:26px; z-index:70;
+  background:var(--glass-strong);
+  border:1px solid var(--glass-brd);
+  -webkit-backdrop-filter:blur(26px) saturate(1.6);
+  backdrop-filter:blur(26px) saturate(1.6);
+  box-shadow:var(--sh-m);
+}
+.nav button{
+  flex:1; min-width:0; border:0; background:none; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  padding:9px 2px 8px; border-radius:19px;
+  color:var(--muted);
+  font-family:var(--f-px); font-size:5.8px; line-height:1.5; letter-spacing:0;
+  transition:color .2s, background .24s, transform .16s;
+}
+.nav button svg{ width:19px; height:19px; }
+.nav button:active{ transform:scale(.94); }
+.nav button.on{
+  color:var(--acc-ink);
+  background:linear-gradient(160deg, var(--acc-2), var(--acc));
+  box-shadow:0 8px 20px -10px rgba(27,122,68,.85);
+}
+
+/* ---------- chips ---------- */
+.chips{ display:flex; gap:7px; margin:11px 0 14px; }
+.chip{
+  flex:1; padding:11px 6px; border-radius:13px; cursor:pointer;
+  border:1.5px solid var(--line); background:var(--surface-2);
+  font-size:12.5px; font-weight:750; color:var(--ink-2);
+  transition:.2s;
+}
+.chip:active{ transform:scale(.97); }
+.chip.on{ background:var(--acc); border-color:transparent; color:var(--acc-ink); }
+
+/* ---------- barra de progreso ---------- */
+.bar{ height:7px; border-radius:99px; background:var(--surface-3); overflow:hidden; }
+.bar i{ display:block; height:100%; border-radius:99px; background:linear-gradient(90deg, var(--acc-2), var(--acc)); transition:width .5s cubic-bezier(.22,.9,.28,1); }
+
+/* ---------- avisos ---------- */
+.alert{
+  display:flex; gap:9px; align-items:flex-start;
+  margin-top:12px; padding:12px 13px; border-radius:14px;
+  background:var(--wa-bg); color:var(--wa);
+  font-size:12.8px; font-weight:600; line-height:1.45;
+}
+.quote{
+  position:relative; margin-top:12px; padding:13px 14px 13px 16px;
+  border-radius:14px; background:var(--surface-2);
+  border-left:3px solid var(--acc-2);
+  font-size:13.5px; line-height:1.5; color:var(--ink-2);
+}
+.quote-tag{
+  display:block; font-size:10px; font-weight:800; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--acc); margin-bottom:4px;
+}
+
+</style>
+<style>
+/* =========================================================
+   Liberate v4 · pantallas
+   ========================================================= */
+
+/* ---------- HERO con plaza pixel ---------- */
+.hero{
+  position:relative; overflow:hidden;
+  height:min(54vh, 460px); min-height:320px;
+  border-radius:0 0 34px 34px;
+  background:#8fd3f4;
+}
+
+/* en HOY el hero estira y la hoja queda apoyada arriba del nav */
+.screen--hoy{
+  min-height:100dvh; display:flex; flex-direction:column;
+  padding-bottom:calc(var(--nav-h) + 16px + var(--safe-b));
+}
+.screen--hoy .hero{ flex:1 1 auto; height:auto; min-height:300px; }
+.screen--hoy .sheet{ flex:none; }
+
+.hero canvas{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:50% 42%;
+  image-rendering:pixelated; image-rendering:crisp-edges;
+}
+.hero-scrim{
+  position:absolute; inset:auto 0 0 0; height:96px; pointer-events:none;
+  background:linear-gradient(to top, var(--bg), rgba(0,0,0,0));
+}
+.hero-top{
+  position:absolute; top:12px; left:12px; right:12px;
+  display:flex; align-items:flex-start; justify-content:space-between; gap:8px;
+}
+.hud{ display:flex; gap:5px; flex-wrap:wrap; max-width:70%; }
+.hud-chip{
+  font-family:var(--f-px); font-size:7.5px; line-height:1.4;
+  padding:7px 8px; border-radius:9px;
+  background:rgba(255,255,255,.90); color:#0D1710;
+  border:1.5px solid rgba(13,23,16,.82);
+  box-shadow:0 2px 0 rgba(13,23,16,.12);
+}
+.ghost-pill{
+  flex:none; padding:8px 11px; border-radius:11px; cursor:pointer;
+  font-size:11px; font-weight:800;
+  background:rgba(255,255,255,.86); color:#0D1710;
+  border:1.5px solid rgba(13,23,16,.20);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+}
+.hero-ovl{
+  position:absolute; inset:0; display:grid; place-items:center;
+  pointer-events:none; padding:20px;
+}
+.hero-ovl b{
+  font-family:var(--f-px); font-size:10px; line-height:1.9; text-align:center;
+  background:rgba(13,23,16,.92); color:#fff; padding:15px 18px; border-radius:12px;
+  box-shadow:0 20px 40px -18px rgba(0,0,0,.7);
+}
+
+/* ---------- hoja (sheet) ---------- */
+.sheet{
+  position:relative; z-index:2;
+  margin:-30px 11px 0;
+  padding:14px 18px 20px;
+  border-radius:28px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  box-shadow:var(--sh-l);
+}
+.grabber{
+  width:38px; height:4px; border-radius:99px;
+  background:var(--line-2); margin:0 auto 14px;
+}
+.sheet-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.sep{ color:var(--muted); font-size:24px; }
+
+/* ---------- respuesta Voy / No voy ---------- */
+.answer{ display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:15px; }
+.answer-btn{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px;
+  min-height:76px; padding:12px 8px;
+  border-radius:18px; cursor:pointer;
+  border:1.5px solid var(--line); background:var(--surface-2); color:var(--ink);
+  font-size:14.5px; font-weight:800; letter-spacing:-.005em;
+  transition:transform .14s ease, background .22s, color .22s, box-shadow .22s, border-color .22s;
+}
+.answer-btn:active{ transform:scale(.97); }
+.answer-ic{
+  display:grid; place-items:center; width:26px; height:26px; border-radius:50%;
+  background:var(--surface-3); font-size:13px; font-weight:800; color:var(--muted);
+  transition:background .22s, color .22s;
+}
+.answer-btn.on{ color:#fff; border-color:transparent; }
+.answer-btn.on.ok{
+  background:linear-gradient(158deg, #37b06a, var(--ok));
+  box-shadow:0 14px 30px -14px rgba(21,128,61,.9);
+}
+.answer-btn.on.no{
+  background:linear-gradient(158deg, #d9503f, var(--no));
+  box-shadow:0 14px 30px -14px rgba(190,58,43,.85);
+}
+.answer-btn.on .answer-ic{ background:rgba(255,255,255,.26); color:#fff; }
+
+/* ---------- grilla de la semana ---------- */
+.week{ display:grid; gap:5px; margin-top:14px; }
+.week-row{ display:grid; grid-template-columns:46px repeat(5, 1fr); gap:5px; align-items:center; }
+.week-day{
+  text-align:center; font-size:11px; font-weight:800;
+  text-transform:uppercase; letter-spacing:.06em; color:var(--muted);
+  padding-bottom:3px;
+}
+.week-day.is-today{ color:var(--acc); }
+.week-day.is-today::after{
+  content:''; display:block; width:4px; height:4px; border-radius:99px;
+  background:var(--acc); margin:3px auto 0;
+}
+.week-hour{ font-size:11px; font-weight:800; color:var(--ink-2); line-height:1.15; }
+.week-hour span{ display:block; font-size:8.5px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+.cell{
+  aspect-ratio:1/1; border-radius:13px; cursor:pointer;
+  border:1.5px dashed var(--line-2); background:none;
+  color:var(--muted); font-size:15px; font-weight:800;
+  display:grid; place-items:center;
+  transition:transform .13s ease, background .2s, border-color .2s, color .2s;
+}
+.cell:active{ transform:scale(.93); }
+.cell.on{
+  border:1.5px solid transparent;
+  background:linear-gradient(158deg, var(--acc-2), var(--acc));
+  color:var(--acc-ink);
+  box-shadow:0 6px 16px -8px rgba(27,122,68,.8);
+}
+.cell.sel{ outline:2px solid var(--ink); outline-offset:2px; }
+.week-foot{ display:flex; gap:14px; margin-top:12px; font-size:11px; color:var(--muted); font-weight:650; }
+
+/* ---------- tiles de estadística ---------- */
+.stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px; }
+.stat{
+  padding:13px 6px 11px; border-radius:16px; text-align:center;
+  background:var(--surface-2); border:1px solid var(--line);
+}
+.stat b{ display:block; font-family:var(--f-disp); font-size:32px; line-height:1; font-weight:400; }
+.stat span{
+  display:block; margin-top:4px; font-size:9.5px; font-weight:800;
+  text-transform:uppercase; letter-spacing:.07em; color:var(--muted);
+}
+.stat.ok{ background:var(--ok-bg); border-color:transparent; }
+.stat.ok b{ color:var(--ok); }
+.stat.no{ background:var(--no-bg); border-color:transparent; }
+.stat.no b{ color:var(--no); }
+.stat.mute b{ color:var(--muted); }
+
+/* ---------- escena mini (profe) ---------- */
+.mini{
+  position:relative; height:250px; overflow:hidden;
+  margin:2px 14px 12px; border-radius:24px;
+  border:1px solid var(--line); background:#8fd3f4;
+  box-shadow:var(--sh-m);
+}
+.mini canvas{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:50% 40%;
+  image-rendering:pixelated;
+}
+.mini .hud{ position:absolute; top:10px; left:10px; max-width:64%; }
+
+/* ---------- textarea ---------- */
+textarea{
+  width:100%; margin-top:7px; padding:12px 13px;
+  border-radius:14px; border:1.5px solid var(--line);
+  background:var(--surface-2); color:var(--ink);
+  font:inherit; font-size:14px; line-height:1.45;
+  resize:none;
+  transition:border-color .2s, background .2s;
+}
+textarea:focus{ outline:none; border-color:var(--acc-2); background:var(--surface); }
+.label{ display:block; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+
+/* ---------- entrenamiento ---------- */
+.ring{
+  --p:0;
+  position:relative; width:216px; height:216px; border-radius:50%;
+  margin:6px auto 4px;
+  background:conic-gradient(var(--acc) calc(var(--p) * 1%), var(--surface-3) 0);
+  display:grid; place-items:center;
+  transition:background .4s linear;
+}
+.ring.pause{ background:conic-gradient(var(--wa) calc(var(--p) * 1%), var(--surface-3) 0); }
+.ring::after{
+  content:''; position:absolute; inset:-9px; border-radius:50%;
+  border:1px solid var(--line);
+}
+.ring-inner{
+  width:184px; height:184px; border-radius:50%;
+  background:var(--surface); display:grid; place-items:center; align-content:center; gap:2px;
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.ring-num{ font-family:var(--f-px); font-size:44px; line-height:1; color:var(--acc); }
+.ring.pause .ring-num{ color:var(--wa); }
+.ring-lab{
+  font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); margin-top:8px;
+}
+
+/* ---------- avatares ---------- */
+.av-hero{
+  border-radius:20px; padding:16px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--acc-soft), transparent 70%),
+    var(--surface-2);
+  border:1px solid var(--line);
+}
+.av{
+  image-rendering:pixelated;
+  background:transparent;
+}
+.av-big{ width:92px; height:auto; margin:0 auto; filter:drop-shadow(0 10px 18px rgba(13,23,16,.18)); }
+.avs{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }
+.avb{
+  cursor:pointer; padding:3px; border-radius:15px;
+  border:2px solid transparent; background:var(--surface);
+  transition:transform .14s ease, border-color .2s, box-shadow .2s;
+}
+.avb:active{ transform:scale(.95); }
+.avb canvas{ width:100%; height:auto; aspect-ratio:3/5; }
+.avb.on{
+  border-color:var(--acc);
+  box-shadow:0 8px 20px -12px rgba(27,122,68,.8);
+}
+
+/* ---------- profe ---------- */
+.page--profe{ padding-bottom:44px; }
+.stu{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:10px 0; border-top:1px solid var(--line);
+}
+.stu:first-child{ border-top:0; }
+.mini-btn{
+  padding:7px 11px; border-radius:11px; cursor:pointer;
+  border:1.5px solid var(--line); background:none; color:var(--ink-2);
+  font-size:11.5px; font-weight:800; white-space:nowrap;
+  transition:.18s;
+}
+.mini-btn.on{ background:var(--ok-bg); border-color:transparent; color:var(--ok); }
+
+/* ---------- misc ---------- */
+.hr{ height:1px; background:var(--line); border:0; margin:14px 0; }
+.kpi{ display:flex; align-items:baseline; gap:6px; }
+.kpi b{ font-family:var(--f-disp); font-size:22px; font-weight:400; }
+.kpi span{ font-size:12px; color:var(--muted); }
+
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("static");</script>
+
+<div id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   Liberate v4 · estado y utilidades de dominio
+   Un único objeto `S` como fuente de verdad.
+   ========================================================= */
+
+const DAYS      = ['Lun','Mar','Mié','Jue','Vie'];
+const DAYS_FULL = ['Lunes','Martes','Miércoles','Jueves','Viernes'];
+
+/* Día de la demo: 2 = miércoles. Toda la UI deriva de acá, así que
+   cambiando este número (o calculándolo con new Date()) se mueve toda la app. */
+const HOY    = 2;
+const CUPO   = 25;
+const PLAN   = 3;
+const TURNOS = 3;
+
+const TURNO = {
+  m: { h:'8:00',  lugar:'Gym',   icon:'☀️' },
+  n: { h:'19:30', lugar:'Plaza', icon:'🌙' }
+};
+
+const S = {
+  role: 'alumno',
+  tab: 'hoy',
+  av: 3,
+  casa: 0,
+  rut: null,
+  run: null,
+  week: { '0-n':1, '2-n':1, '4-n':1 },
+  sel: '2-n',
+  llamada: 'abierta',
+  clima: 'normal',
+  mi: 'esperado',
+  mit: 0,
+  meA: false,
+  msg: 'Hoy circuito, traigan agua 💧',
+  al: ['Caro M.','Nicolás P.','Lau G.','Fede R.','Sofi D.','Mati L.','Juli A.','Agus B.',
+       'Vale T.','Lucho F.','Mica S.','Tomi H.','Pau C.','Ezequiel O.','Flor N.','Gonza V.',
+       'Cami Q.','Dami K.','Rocío E.','Santi Z.'].map((n, i) => ({
+         n, t: 0, a: false,
+         st: i < 9 ? 'voy' : (i === 10 || i === 15) ? 'no_voy' : 'esperado'
+       }))
+};
+
+/* rutinas de entrenamiento en casa */
+const RT = [
+  { n:'Circuito express', lv:'Intermedio', eq:'Sin equipo',
+    ex:['Sentadillas','Flexiones','Mountain climbers','Plancha','Burpees','Zancadas'] },
+  { n:'Tren inferior', lv:'Principiante', eq:'Sin equipo',
+    ex:['Sentadilla sumo','Puente de glúteos','Zancadas alternas','Sentadilla con salto',
+        'Elevación de talones','Sentadilla isométrica','Patada de glúteo','Estocada lateral'] },
+  { n:'Movilidad y elongación', lv:'Todos', eq:'Colchoneta',
+    ex:['Rotación de cadera','Gato y vaca','Estocada con giro','Estiramiento de isquios','Postura del niño'] }
+];
+
+/* ---------- derivados ---------- */
+function cnt(){
+  const v = S.al.filter(x => x.st === 'voy').length    + (S.mi === 'voy' ? 1 : 0);
+  const n = S.al.filter(x => x.st === 'no_voy').length + (S.mi === 'no_voy' ? 1 : 0);
+  const t = S.al.length + 1;
+  return { v, n, s: t - v - n, t };
+}
+const nSel = () => Object.keys(S.week).length;
+const stp  = () => S.mi === 'voy' ? 'Voy' : S.mi === 'no_voy' ? 'No voy' : 'Esperado';
+
+const waLink = () => 'https://wa.me/?text=' + encodeURIComponent(
+  `Liberate 🌳 Hoy entrenamos a las 19:30 en la Plaza. ${S.msg}\n¿Venís? Confirmá acá: https://liberate.app/hoy`
+);
+
+/* ---------- toast ---------- */
+function toast(m){
+  const el = document.getElementById('toast');
+  if (!el) return;
+  el.textContent = m;
+  el.classList.add('s');
+  clearTimeout(toast.k);
+  toast.k = setTimeout(() => el.classList.remove('s'), 2600);
+}
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · Plaza pixel art (motor procedural)
+   Se dibuja a 192x420 lógico y se escala con pixelated.
+   El "suelo" está en y=90 (constante OY): todo el mundo se
+   dibuja en coordenadas de piso y el canvas se corre 90px.
+   ========================================================= */
+
+const SL = [];
+[20,40,60,132,152,172].forEach(x => SL.push([x, 90, 1]));
+for (let i=0;i<10;i++) SL.push([10 + i*18, 102, 1]);
+for (let i=0;i<7;i++)  SL.push([14 + i*26, 122, 2]);
+for (let i=0;i<5;i++)  SL.push([22 + i*37, 142, 2]);
+for (let i=0;i<5;i++)  SL.push([22 + i*37, 174, 3]);
+
+const MI  = SL.findIndex(s => s[1] === 122 && s[0] === 92);
+const ORD = SL.filter((s, i) => i !== MI);
+
+/* ---------- quiénes están en la plaza ---------- */
+function who(){
+  const l = [];
+  if (S.mi === 'voy'){
+    const s = SL[MI];
+    l.push({ x:s[0], y:s[1], u:s[2], seed:S.av, t:S.mit, me:1, id:99 });
+  }
+  S.al.forEach((a, i) => {
+    if (a.st !== 'voy') return;
+    const s = ORD[(i*11 + 2) % ORD.length];
+    l.push({ x:s[0], y:s[1], u:s[2], seed:i+1, t:a.t, id:i });
+  });
+  return l.sort((a, b) => a.y - b.y);
+}
+
+/* ---------- un personaje ---------- */
+function person(g, p, now){
+  const SKIN = ['#f2c7a0','#d9a273','#a8704a','#7a4a2e'];
+  const HAIR = ['#1b1b1b','#5a3320','#d9a62e','#8b2d2d','#555'];
+  const SHIRT= ['#ffffff','#2a6fdb','#e8541e','#7a3fb0','#f2c200','#111','#d83a6a'];
+  const PANT = ['#222','#3a4a6a','#555'];
+
+  const u = p.u, age = now - p.t;
+  const fr  = Math.floor(now/260 + p.id) % 2;
+  const hop = Math.sin(now/420 + p.id*1.7) > .93;
+
+  let dy = 0;
+  if (age < 700){                       // animación de llegada
+    const k = 1 - age/700;
+    dy = -Math.round(k*k*70);
+    g.globalAlpha = Math.min(1, age/200);
+  } else if (hop) dy = -u;
+
+  g.fillStyle = 'rgba(0,0,0,.22)';
+  g.fillRect(Math.round(p.x - 2*u), p.y, 4*u, u);
+
+  const y = p.y + dy;
+  const R = (a, b, w, h, c) => {
+    g.fillStyle = c;
+    g.fillRect(Math.round(p.x + a*u), Math.round(y + b*u), w*u, h*u);
+  };
+
+  R(-2,-11, 4,2, HAIR[p.seed*3 % 5]);
+  R(-2, -9, 4,2, SKIN[p.seed % 4]);
+  R(-1, -8, 1,1, '#111'); R(1,-8, 1,1, '#111');
+  R(-2, -7, 4,3, SHIRT[p.seed*5 % 7]);
+  R(-3, -7, 1,3, SKIN[p.seed % 4]); R(2,-7, 1,3, SKIN[p.seed % 4]);
+  R(-2, -4, 4,2, PANT[p.seed % 3]);
+  R(-2, -2, 1, 2-fr, SKIN[p.seed % 4]);
+  R( 1, -2, 1, 1+fr, SKIN[p.seed % 4]);
+
+  if (p.me){ R(-1,-15, 3,1, '#ffd23f'); R(0,-14, 1,1, '#ffd23f'); }  // coronita
+  g.globalAlpha = 1;
+}
+
+/* ---------- escena completa ---------- */
+function drawScene(cv, now){
+  const g = cv.getContext('2d');
+  const W = 192, H = 330, OY = 90;
+  const w = S.clima === 'cancelada' ? 2 : S.clima === 'a_confirmar' ? 1 : 0;
+
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.clearRect(0, 0, W, 420);
+  g.setTransform(1, 0, 0, 1, 0, OY);
+
+  const F = (x,y,a,b,c) => { g.fillStyle = c; g.fillRect(x,y,a,b); };
+  const C = (cx,cy,r,c) => {
+    g.fillStyle = c;
+    for (let j=-r;j<=r;j++){
+      const q = Math.round(Math.sqrt(r*r - j*j));
+      g.fillRect(cx-q, cy+j, q*2, 1);
+    }
+  };
+
+  /* cielo */
+  const sky = [['#8fd3f4','#b6e6f8'], ['#93a6b0','#b3c1c8'], ['#5d6d77','#77878f']][w];
+  F(0, -OY, W, 70+OY, sky[0]);
+  [-70,-45,-20,5,30,50,62].forEach((y,i) => F(0, y, W, i<6 ? (i+2)*3 : 8, sky[1]));
+
+  if (!w){ C(150,-45,11,'#fff3a8'); C(150,-45,8,'#ffd93d'); }         // sol
+
+  /* nubes con parallax */
+  for (let k=0;k<9;k++){
+    const x = Math.round((now/(70+k*12) + k*47) % (W+60) - 30);
+    const y = -85 + k*14;
+    const c = w ? ['#aab6bc','#8a979e','#6f7c83'][w] : '#fff';
+    F(x,y, 22,5, c); F(x+4,y-3, 12,4, c); F(x+14,y-2, 10,4, c);
+  }
+
+  /* arboleda de fondo */
+  for (let i=0;i<14;i++){ C(i*15+5, 68, 10, '#2e6b3a'); C(i*15+12, 70, 7, '#3f8f4f'); }
+
+  /* pasto con franjas */
+  F(0, 68, W, H-68, '#7cc24a');
+  for (let y=70, h=3, k=0; y<H; y+=h, h+=.7, k++)
+    if (k%2) F(0, Math.round(y), W, Math.round(h), '#6db33f');
+
+  /* camino de piedra en perspectiva */
+  for (let y=88;y<H;y++){
+    const hw = Math.floor(9 + (y-88)*.9), c = y%7==0 ? '#cdcab9' : '#e9e7db';
+    F(96-hw, y, hw*2, 1, c);
+    F(96-hw, y, 1,1, '#9a9885'); F(96+hw-1, y, 1,1, '#9a9885');
+  }
+
+  /* árboles */
+  const T = (x,y,s) => {
+    F(x-2*s, y-14*s, 4*s, 14*s, '#6b4a2b');
+    C(x, y-20*s, 10*s, '#2f7d3b');
+    C(x-3*s, y-23*s, 6*s, '#4fa04c');
+    C(x+4*s, y-18*s, 5*s, '#3a8a43');
+  };
+  T(40,82,.8); T(152,80,.8); T(14,108,1.1); T(178,104,1.1);
+
+  /* bancos */
+  const Bn = (x,y) => {
+    F(x,y-7, 14,2, '#a0642f'); F(x,y-4, 14,2, '#c07a3a');
+    F(x+1,y-2, 2,4, '#222');   F(x+11,y-2, 2,4, '#222');
+  };
+  Bn(60,86); Bn(118,86); Bn(2,128); Bn(176,128);
+
+  /* fuente */
+  F(80,82, 32,7, '#bdb9a8'); F(82,84, 28,4, '#8ecfe8'); F(80,89, 32,2, '#8c8872');
+  F(94,70, 4,12, '#bdb9a8'); F(88,72, 16,3, '#cfccbd');
+  for (let i=0;i<7;i++)
+    F(96 + Math.round(Math.sin(now/180 + i*1.3)*(i+1)), 64 + (i*1.5|0), 1,2, '#e6f7ff');
+
+  /* gente */
+  if (S.clima !== 'cancelada') who().forEach(p => person(g, p, now));
+
+  /* clima encima de todo */
+  g.setTransform(1,0,0,1,0,0);
+  if (w === 1) F(0,0, W,420, 'rgba(60,70,80,.18)');
+  if (w === 2){
+    F(0,0, W,420, 'rgba(20,30,40,.4)');
+    for (let i=0;i<50;i++)
+      F((i*53)%W, Math.floor((now/5 + i*29)%420), 1,4, '#cfe6f2');
+  }
+}
+
+/* ---------- loop único para todos los canvas de plaza ---------- */
+let lastPaint = 0;
+function paintPlaza(now){
+  if (now - lastPaint >= 60){
+    lastPaint = now;
+    document.querySelectorAll('canvas.plaza').forEach(cv => {
+      cv.width = 192; cv.height = 420;          // evita canvas borroso al re-render
+      drawScene(cv, now);
+    });
+  }
+  requestAnimationFrame(paintPlaza);
+}
+requestAnimationFrame(paintPlaza);
+
+/* ---------- dibujo único (modo captura) ---------- */
+function paintPlazaOnce(t){
+  document.querySelectorAll('canvas.plaza').forEach(cv => {
+    cv.width = 192; cv.height = 420;
+    drawScene(cv, t || 1200);
+  });
+}
+
+/* ---------- markup de las dos escenas ---------- */
+const hudChips = (full) => {
+  const c = cnt(), cx = S.clima === 'cancelada';
+  const lab = ['☀️ Despejado','☁️ A confirmar','🌧 Lluvia'][cx ? 2 : S.clima === 'a_confirmar' ? 1 : 0];
+  return `<span class="hud-chip">👥 ${cx ? 0 : c.v}/${CUPO}</span><span class="hud-chip">${lab}</span>`
+       + (full ? `<span class="hud-chip">🔥 4</span>` : '');
+};
+
+const sceneHero = () => `
+  <div class="hero">
+    <canvas class="plaza" width="192" height="420" aria-label="Plaza con los alumnos que confirmaron"></canvas>
+    <div class="hero-top">
+      <div class="hud">${hudChips(1)}</div>
+      <button class="ghost-pill" onclick="setRole('profe')" aria-label="Ver la app como profe">Profe</button>
+    </div>
+    <div class="hero-scrim"></div>
+    ${S.clima === 'cancelada'
+      ? `<div class="hero-ovl"><b>CLASE CANCELADA<br>POR LLUVIA</b></div>` : ''}
+  </div>`;
+
+const sceneMini = () => `
+  <div class="mini">
+    <canvas class="plaza" width="192" height="420" aria-label="Plaza del día"></canvas>
+    <div class="hud">${hudChips(0)}</div>
+    ${S.clima === 'cancelada'
+      ? `<div class="hero-ovl"><b>CLASE CANCELADA<br>POR LLUVIA</b></div>` : ''}
+  </div>`;
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · UI compartida (iconos, appbar, nav, avatares)
+   ========================================================= */
+
+const ICONS = {
+  sun:     '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>',
+  calendar:'<rect x="3" y="4.5" width="18" height="16" rx="4"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/>',
+  dumbbell:'<path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10"/>',
+  user:    '<circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.2c.6-3.6 3.5-5.6 7.2-5.6s6.6 2 7.2 5.6"/>',
+  users:   '<circle cx="9" cy="8" r="3.2"/><path d="M3 20.2c.5-3.2 2.9-4.9 6-4.9s5.5 1.7 6 4.9"/><path d="M16.2 5.2a3.2 3.2 0 0 1 0 6.1M17.5 15.6c2.1.5 3.4 2.1 3.7 4.6"/>',
+  check:   '<path d="M4.5 12.6l4.7 4.7L19.5 7"/>',
+  x:       '<path d="M6 6l12 12M18 6L6 18"/>',
+  cloud:   '<path d="M7 17.5h9.5a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.6-1.4A3.6 3.6 0 0 0 7 17.5z"/>',
+  rain:    '<path d="M7 14.5h9.5a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.6-1.4A3.6 3.6 0 0 0 7 14.5z"/><path d="M8.5 17.5l-1 2.5M12.5 17.5l-1 2.5M16.5 17.5l-1 2.5"/>',
+  play:    '<path d="M8.5 5.5l10 6.5-10 6.5z"/>',
+  bell:    '<path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9z"/><path d="M10 18a2.2 2.2 0 0 0 4 0"/>',
+  wa:      '<path d="M3.5 20.5l1.4-4A8.2 8.2 0 1 1 8 19.2z"/><path d="M8.6 8.4c.2 2.2 2.4 4.4 4.6 4.6.7.1 1.3-.5 1.3-1.2 0-.5-.4-.8-1.4-1.1-.5-.2-.9.4-1.2.6-1-.4-1.9-1.3-2.3-2.3.2-.3.8-.7.6-1.2-.3-1-.6-1.4-1.1-1.4-.7 0-1.3.6-1.2 1.3z"/>',
+  dice:    '<rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="8.5" cy="15.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" stroke="none"/>',
+  flame:   '<path d="M12 3s5 4.2 5 9a5 5 0 0 1-10 0c0-1.9.9-3.4 1.8-4.4.4 1.2 1.1 1.9 1.9 1.9 1.3 0 1.7-1.4 1.3-2.6z"/>',
+  back:    '<path d="M14.5 5.5L8 12l6.5 6.5"/>',
+  bolt:    '<path d="M13.5 3L6 13.5h5l-.5 7.5L18 10.5h-5z"/>',
+  spark:   '<path d="M12 3.5l1.6 4.6 4.6 1.6-4.6 1.6L12 16l-1.6-4.7L5.8 9.7l4.6-1.6z"/>',
+  clock:   '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  pin:     '<path d="M12 21s6.5-6.2 6.5-11A6.5 6.5 0 0 0 5.5 10c0 4.8 6.5 11 6.5 11z"/><circle cx="12" cy="10" r="2.4"/>'
+};
+
+function ic(name, size){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+    stroke-linecap="round" stroke-linejoin="round" ${size ? `style="width:${size}px;height:${size}px"` : ''}
+    aria-hidden="true">${ICONS[name] || ''}</svg>`;
+}
+
+/* ---------- barra superior ---------- */
+const appbar = () => `
+  <header class="appbar">
+    <div class="logo">liber<span>ate</span></div>
+    <button class="role-btn" onclick="setRole('profe')">${ic('users')} VER COMO PROFE</button>
+  </header>`;
+
+/* ---------- navegación inferior ---------- */
+const TABS = [
+  ['hoy',    'sun',      'HOY'],
+  ['lib',    'calendar', 'MI LIBERATE'],
+  ['casa',   'dumbbell', 'EN CASA'],
+  ['perfil', 'user',     'PERFIL']
+];
+
+const nav = () => `
+  <nav class="nav" aria-label="Navegación principal">
+    ${TABS.map(([k, i, l]) => `
+      <button class="${S.tab === k ? 'on' : ''}" onclick="go('${k}')"
+        ${S.tab === k ? 'aria-current="page"' : ''}>
+        ${ic(i)}${l}
+      </button>`).join('')}
+  </nav>`;
+
+/* ---------- shell de página ---------- */
+function page(title, sub, body, opts = {}){
+  return `
+  <div class="screen${opts.profe ? ' page--profe' : ''}">
+    ${opts.profe ? '' : appbar()}
+    <div class="page-head">
+      <h1>${title}</h1>
+      ${sub ? `<p class="sub">${sub}</p>` : ''}
+    </div>
+    <div class="page-body">${body}</div>
+    ${opts.note ? `<p class="note">${opts.note}</p>` : ''}
+  </div>`;
+}
+
+/* ---------- avatares (canvas) ---------- */
+function paintAvatars(){
+  document.querySelectorAll('canvas.av').forEach(c => {
+    const u = +c.dataset.u, s = +c.dataset.s;
+    c.getContext('2d').clearRect(0, 0, c.width, c.height);
+    person(c.getContext('2d'), {
+      x: c.width/2, y: c.height - 4, u, seed: s, t: 0, id: 0
+    }, 1e6);
+  });
+}
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · pantalla HOY (alumno)
+   ========================================================= */
+
+function hoy(){
+  const cx = S.clima === 'cancelada';
+  const ab = S.llamada === 'abierta';
+  const t  = TURNO.n;
+
+  const status = cx
+    ? `<span class="pill pill--no">Cancelada</span>`
+    : ab ? `<span class="pill pill--ok">Llamada abierta</span>`
+         : `<span class="pill pill--mute">Esperado</span>`;
+
+  const copy = S.mi === 'esperado'
+      ? 'Todavía no respondiste (igual tenés tu lugar fijo)'
+      : S.mi === 'voy'
+        ? '¡Tu personaje ya está en la plaza! 💪'
+        : 'Liberaste tu lugar. Podés cambiarlo cuando quieras.';
+
+  return `
+  <div class="screen screen--hoy">
+    ${sceneHero()}
+    <div class="sheet">
+      <div class="grabber"></div>
+
+      <div class="sheet-head">
+        <div>
+          <div class="eyebrow">${DAYS_FULL[HOY]} · hoy</div>
+          <h1 style="margin-top:2px">${t.h} <span class="sep">·</span> ${t.lugar}</h1>
+        </div>
+        ${status}
+      </div>
+
+      ${S.clima === 'a_confirmar'
+        ? `<div class="alert">${ic('cloud', 15)}<div>Clima en duda. El profe confirma a las 19:00.</div></div>`
+        : ''}
+
+      ${cx
+        ? `<p class="sub" style="margin-top:10px">No se descuenta de tu plan. ¡Nos vemos en la próxima!</p>`
+        : (ab && S.msg
+            ? `<div class="quote"><span class="quote-tag">Profe</span>${S.msg}</div>`
+            : '')}
+
+      ${!cx ? `
+        <div class="answer">
+          <button class="answer-btn ok ${S.mi === 'voy' ? 'on' : ''}" onclick="mi('voy')"
+            aria-pressed="${S.mi === 'voy'}">
+            <span class="answer-ic">${ic('check', 13)}</span>Voy
+          </button>
+          <button class="answer-btn no ${S.mi === 'no_voy' ? 'on' : ''}" onclick="mi('no_voy')"
+            aria-pressed="${S.mi === 'no_voy'}">
+            <span class="answer-ic">${ic('x', 13)}</span>No voy
+          </button>
+        </div>
+        <p class="hint">${copy}</p>` : ''}
+    </div>
+    ${nav()}
+  </div>`;
+}
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · pantalla MI LIBERATE (calendario / semana fija)
+   ========================================================= */
+
+function liberate(){
+  const [i, k] = S.sel.split('-');
+  const d    = +i;
+  const t    = TURNO[k];
+  const free = (k === 'm' ? 15 : 25) - (6 + d*2);
+
+  /* próximas clases: hoy y después, dando la vuelta a la semana */
+  const orden = [2,3,4,0,1];
+  const up = orden.flatMap(j => ['m','n'].filter(q => S.week[j+'-'+q]).map(q => [j, q]));
+
+  const proximas = up.length ? up.map(([j, q]) => {
+    const tt = TURNO[q];
+    const esHoy = j === HOY && q === 'n';
+    return `
+      <div class="item">
+        <div class="day-badge ${j === HOY ? 'is-today' : ''}">
+          <b>${DAYS[j]}</b><span>${j === HOY ? 'hoy' : j < HOY ? 'próx.' : 'sem'}</span>
+        </div>
+        <div class="item-main">
+          <div class="item-title">${tt.h} · ${tt.lugar}</div>
+          <div class="item-sub">${DAYS_FULL[j]}${j === HOY ? ' · hoy' : ''}</div>
+        </div>
+        ${esHoy
+          ? `<span class="pill ${S.mi === 'voy' ? 'pill--ok' : S.mi === 'no_voy' ? 'pill--no' : 'pill--mute'}">${stp()}</span>`
+          : `<span class="pill pill--mute">Fija</span>`}
+      </div>`;
+  }).join('') : `<p class="sub">Todavía no armaste tu semana.</p>`;
+
+  const filas = ['m','n'].map(q => {
+    const tt = TURNO[q];
+    return `
+      <div class="week-row">
+        <div class="week-hour">${tt.h}<span>${tt.lugar}</span></div>
+        ${DAYS.map((_, j) => {
+          const on = !!S.week[j+'-'+q];
+          return `<button class="cell ${on ? 'on' : ''} ${S.sel === j+'-'+q ? 'sel' : ''}"
+            onclick="tog(${j},'${q}')" aria-pressed="${on}"
+            aria-label="${DAYS_FULL[j]} ${tt.h} ${tt.lugar}">${on ? ic('check', 15) : '+'}</button>`;
+        }).join('')}
+      </div>`;
+  }).join('');
+
+  const body = `
+    <div class="card">
+      <div class="card-head"><h3>Próximas clases</h3>${ic('calendar', 17)}</div>
+      <div class="list">${proximas}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>Mi semana fija</h3>
+        <span class="pill ${nSel() >= PLAN ? 'pill--wa' : 'pill--ok'}">${nSel()}/${PLAN} clases</span>
+      </div>
+      <p class="sub">Elegí tu turno base y se arma solo:</p>
+      <div class="chips">
+        <button class="chip" onclick="base('m')">☀️ Mañana</button>
+        <button class="chip" onclick="base('n')">🌙 Noche</button>
+        <button class="chip" onclick="base('x')">🔀 Mixto</button>
+      </div>
+      <div class="week">
+        <div class="week-row">
+          <div></div>
+          ${DAYS.map((n, j) => `<div class="week-day ${j === HOY ? 'is-today' : ''}">${n}</div>`).join('')}
+        </div>
+        ${filas}
+      </div>
+      <div class="week-foot">
+        <span>${ic('clock', 12)} 2 turnos</span>
+        <span>${ic('pin', 12)} Gym y Plaza</span>
+      </div>
+    </div>
+
+    <div class="card card--flat">
+      <div class="card-head" style="margin-bottom:8px">
+        <h3 style="margin:0">${DAYS_FULL[d]} · ${t.h} · ${t.lugar}</h3>
+        <span class="pill pill--mute">${free} lugares</span>
+      </div>
+      <p class="sub">${S.week[S.sel]
+        ? 'Es parte de tu semana fija.'
+        : 'No es tu horario fijo. Podés sumarte como clase extra si hay lugar.'}</p>
+      <div style="margin-top:12px;display:grid;gap:8px">
+        <button class="btn btn--ghost btn--sm" onclick="toast('Demo: te anotarías solo esta semana')">
+          Anotarme solo esta semana</button>
+        <button class="btn btn--ghost btn--sm" onclick="toast('Demo: pasarías al otro turno solo hoy')">
+          Pasarme al otro turno solo hoy</button>
+      </div>
+    </div>`;
+
+  return page('Mi Liberate', `${DAYS_FULL[HOY]} · ${cnt().v} confirmados hoy`, body + nav(), {
+    note: 'Cambios permanentes aplican desde la semana próxima si los hacés hasta el domingo.'
+  });
+}
+
+function tog(i, k){
+  const key = i + '-' + k;
+  S.sel = key;
+  if (S.week[key]) delete S.week[key];
+  else {
+    if (nSel() >= PLAN){
+      toast('Llegaste al tope de tu plan (3 clases por semana)');
+      render();
+      return;
+    }
+    S.week[key] = 1;
+  }
+  render();
+}
+
+function base(t){
+  S.week = {};
+  [0,2,4].forEach(d => {
+    if (t === 'm' || t === 'x') S.week[d+'-m'] = 1;
+    if (t === 'n')              S.week[d+'-n'] = 1;
+  });
+  if (t === 'x'){ delete S.week['4-m']; S.week['4-n'] = 1; }
+  toast('Semana armada según tu turno');
+  render();
+}
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · pantalla ENTRENAR EN CASA
+   ========================================================= */
+
+function casa(){
+  if (S.run) return runner();
+  if (S.rut != null) return detalleRutina();
+
+  const body = `
+    <div class="card card--glass">
+      <div class="card-head" style="margin-bottom:6px">
+        <h3>Esta semana</h3>
+        <span class="pill pill--acc">${ic('flame', 12)} ${S.casa} hechos</span>
+      </div>
+      <p class="sub">Para los días que no podés venir a la plaza.</p>
+    </div>
+
+    ${RT.map((r, i) => `
+      <div class="card" role="button" tabindex="0"
+        onclick="abrirRutina(${i})" onkeydown="if(event.key==='Enter')abrirRutina(${i})">
+        <div class="card-head" style="margin-bottom:6px">
+          <h3 style="margin:0">${r.n}</h3>
+          <span class="pill pill--mute">${r.ex.length} min</span>
+        </div>
+        <div class="row-between">
+          <p class="sub">${r.lv} · ${r.eq}</p>
+          <span style="color:var(--acc)">${ic('play', 18)}</span>
+        </div>
+      </div>`).join('')}`;
+
+  return page('Entrenar en casa', 'Rutinas cortas, sin equipo. Sumá igual tu semana.', body + nav());
+}
+
+function abrirRutina(i){ S.rut = i; render(); }
+
+function detalleRutina(){
+  const r = RT[S.rut];
+  const body = `
+    <div class="card">
+      <div class="card-head">
+        <h3 style="margin:0">${r.n}</h3>
+        <span class="pill pill--mute">${r.ex.length} ejercicios</span>
+      </div>
+      <p class="sub">40 s de trabajo · 20 s de pausa · ${r.lv} · ${r.eq}</p>
+      <hr class="hr">
+      <div class="list">
+        ${r.ex.map((e, i) => `
+          <div class="item">
+            <div class="day-badge" style="width:34px;height:34px;border-radius:10px">
+              <b style="font-size:13px">${i+1}</b>
+            </div>
+            <div class="item-main"><div class="item-title">${e}</div></div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div style="margin-top:12px;display:grid;gap:8px">
+      <button class="btn btn--acc" onclick="start()">${ic('play', 17)} Empezar</button>
+      <button class="btn btn--ghost btn--sm" onclick="S.rut=null;render()">Volver</button>
+    </div>`;
+  return page(r.n, 'Sin equipo, sin excusas.', body + nav());
+}
+
+function start(){
+  S.run = { i:0, left:40, rest:false, done:0 };
+  clearInterval(S.iv);
+  S.iv = setInterval(tick, 1000);
+  render();
+}
+
+/* El timer actualiza sólo el anillo, sin repintar toda la pantalla. */
+function tick(){
+  const r = S.run; if (!r) return;
+  r.left--;
+
+  if (r.left < 0){
+    const n = RT[S.rut].ex.length;
+    if (!r.rest && r.i === n-1){ r.done = 1; clearInterval(S.iv); S.casa++; }
+    else if (!r.rest){ r.rest = true; r.left = 20; }
+    else { r.i++; r.rest = false; r.left = 40; }
+  }
+
+  if (r.done){ render(); return; }
+  paintRunner(r);
+}
+
+function paintRunner(r){
+  const ex = RT[S.rut].ex;
+  const ring  = document.getElementById('ring');
+  const num   = document.getElementById('ringNum');
+  const lab   = document.getElementById('ringLab');
+  const name  = document.getElementById('exName');
+  const next  = document.getElementById('exNext');
+  const step  = document.getElementById('exStep');
+  if (!ring || r.done) { render(); return; }
+
+  const p = r.rest ? (20 - r.left)/20*100 : (40 - r.left)/40*100;
+  ring.style.setProperty('--p', p.toFixed(1));
+  ring.classList.toggle('pause', r.rest);
+  num.textContent = r.left;
+  lab.textContent = r.rest ? 'Pausa' : 'Trabajo';
+  name.textContent = r.rest ? 'Recuperá' : ex[r.i];
+  step.textContent = `Ejercicio ${r.i+1} de ${ex.length}`;
+  next.textContent = ex[r.i+1] ? 'Sigue: ' + ex[r.i+1] : '¡Último ejercicio!';
+}
+
+function runner(){
+  const r = S.run, ex = RT[S.rut].ex;
+
+  if (r.done){
+    const bodyDone = `
+      <div class="card center" style="padding:28px 18px">
+        <div style="color:var(--acc);display:flex;justify-content:center">${ic('flame', 54)}</div>
+        <h2 style="margin-top:12px">Entrenamiento completo</h2>
+        <p class="sub" style="margin-top:6px">Llevás ${S.casa} entrenamientos en casa esta semana.</p>
+      </div>
+      <button class="btn btn--acc" style="margin-top:12px"
+        onclick="S.run=null;S.rut=null;render()">Volver</button>`;
+    return page('¡Listo!', 'Un día más que no se negocia.', bodyDone + nav());
+  }
+
+  const p = r.rest ? (20 - r.left)/20*100 : (40 - r.left)/40*100;
+
+  const body = `
+    <div class="card center" style="padding:20px 16px 24px">
+      <div class="eyebrow" id="exStep">Ejercicio ${r.i+1} de ${ex.length}</div>
+      <h2 id="exName" style="margin:6px 0 2px">${r.rest ? 'Recuperá' : ex[r.i]}</h2>
+
+      <div class="ring ${r.rest ? 'pause' : ''}" id="ring" style="--p:${p.toFixed(1)}"
+        role="timer" aria-live="off">
+        <div class="ring-inner">
+          <div class="ring-num" id="ringNum">${r.left}</div>
+          <div class="ring-lab" id="ringLab">${r.rest ? 'Pausa' : 'Trabajo'}</div>
+        </div>
+      </div>
+
+      <p class="sub" style="margin-top:16px" id="exNext">
+        ${ex[r.i+1] ? 'Sigue: ' + ex[r.i+1] : '¡Último ejercicio!'}</p>
+    </div>
+
+    <button class="btn btn--ghost btn--sm" style="margin-top:10px"
+      onclick="clearInterval(S.iv);S.run=null;render()">Terminar</button>`;
+
+  return page(RT[S.rut].n, '40 s de trabajo · 20 s de pausa', body + nav());
+}
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · pantalla PERFIL
+   ========================================================= */
+
+function perfil(){
+  const usadas = 9, total = 12, racha = 4;
+
+  const body = `
+    <div class="card center av-hero">
+      <canvas class="av av-big" data-u="6" data-s="${S.av}" width="48" height="80"
+        aria-label="Tu personaje en la plaza"></canvas>
+      <h3 style="margin-top:12px">Alumno demo</h3>
+      <p class="sub" style="margin-top:2px">Elegí tu personaje para la plaza</p>
+      <div class="avs">
+        ${[0,1,2,3,4,5,6,7].map(s => `
+          <button class="avb ${S.av === s ? 'on' : ''}" onclick="setAv(${s})"
+            aria-pressed="${S.av === s}" aria-label="Personaje ${s+1}">
+            <canvas class="av" data-u="3" data-s="${s}" width="24" height="40"></canvas>
+          </button>`).join('')}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 style="margin:0">Mi membresía</h3>
+        <span class="pill pill--ok">Activa</span>
+      </div>
+      <div class="serif xl">Plan 3 clases por semana</div>
+      <p class="sub" style="margin-top:2px">Vence el 30/11</p>
+
+      <div class="row-between" style="margin-top:16px">
+        <span class="sub" style="font-weight:700;color:var(--ink-2)">Clases del mes</span>
+        <span class="kpi"><b>${usadas}</b><span>/ ${total}</span></span>
+      </div>
+      <div class="bar" style="margin-top:8px"><i style="width:${usadas/total*100}%"></i></div>
+
+      <div class="stats">
+        <div class="stat ok"><b>${racha}</b><span>Racha</span></div>
+        <div class="stat"><b>${total-usadas}</b><span>Restan</span></div>
+        <div class="stat"><b>${nSel()}</b><span>Fijas / sem</span></div>
+      </div>
+
+      <div style="display:grid;gap:8px;margin-top:14px">
+        <button class="btn btn--ghost btn--sm" onclick="toast('Demo: pausar plan')">Pausar plan</button>
+        <button class="btn btn--acc btn--sm" onclick="toast('Demo: renovar cuota')">Renovar</button>
+      </div>
+    </div>`;
+
+  return page('Perfil', 'Tu personaje, tu plan y tu racha.', body + nav());
+}
+
+function setAv(s){ S.av = s; render(); }
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · vista PROFE
+   ========================================================= */
+
+function profe(){
+  const c  = cnt();
+  const ab = S.llamada === 'abierta';
+  const cx = S.clima === 'cancelada';
+
+  /* ---------- estado del clima ---------- */
+  const bloqueClima = cx
+    ? `<div class="card">
+         <div class="card-head">
+           <h3 style="margin:0">Clase cancelada</h3>
+           <span class="pill pill--no">${ic('rain', 12)} Lluvia</span>
+         </div>
+         <p class="sub">Se avisó a todos y no se descuenta del plan.</p>
+         <button class="btn btn--ghost btn--sm" style="margin-top:12px"
+           onclick="S.clima='normal';render()">Deshacer</button>
+       </div>`
+    : `<div class="card">
+         <div class="card-head"><h3 style="margin:0">Clima</h3>${ic('cloud', 17)}</div>
+         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+           <button class="btn btn--ghost btn--sm" onclick="toggleClima()">
+             ${ic('cloud', 14)} ${S.clima === 'a_confirmar' ? 'Confirmado' : 'A confirmar'}</button>
+           <button class="btn btn--ghost btn--sm btn--danger-ghost" onclick="cancelarPorLluvia()">
+             ${ic('rain', 14)} Cancelar</button>
+         </div>
+       </div>`;
+
+  /* ---------- abrir llamada / panel de respuestas ---------- */
+  const bloqueLlamada = (!ab && !cx)
+    ? `<div class="card">
+         <div class="card-head">
+           <h3 style="margin:0">Pasar lista</h3>
+           <span class="pill pill--mute">Sin abrir</span>
+         </div>
+         <p class="sub">Abrí la llamada del día para que los alumnos confirmen.</p>
+         <button class="btn btn--acc" style="margin-top:14px" onclick="abrirLlamada()">
+           ${ic('bell', 16)} Abrir llamada de hoy</button>
+       </div>`
+    : (ab ? `<div class="card card--glass">
+         <div class="card-head">
+           <h3 style="margin:0">Respuestas de hoy</h3>
+           <button class="mini-btn on" onclick="cerrarLlamada()">${ic('bolt', 11)} Abierta · cerrar</button>
+         </div>
+         <div class="stats">
+           <div class="stat ok"><b>${c.v}</b><span>Voy</span></div>
+           <div class="stat no"><b>${c.n}</b><span>No voy</span></div>
+           <div class="stat mute"><b>${c.s}</b><span>Sin resp.</span></div>
+         </div>
+
+         <label class="label" style="margin-top:16px">Mensaje para el grupo</label>
+         <textarea rows="2" oninput="S.msg=this.value">${S.msg}</textarea>
+
+         <a class="btn btn--wa btn--sm" style="margin-top:9px" target="_blank" rel="noopener" href="${waLink()}">
+           ${ic('wa', 15)} Compartir en WhatsApp</a>
+         <div style="display:grid;gap:8px;margin-top:8px">
+           <button class="btn btn--ghost btn--sm" onclick="sim()">${ic('dice', 14)} Simular respuestas (demo)</button>
+           <button class="btn btn--ghost btn--sm" onclick="recordar()">${ic('bell', 14)} Recordar a los ${c.s} que faltan</button>
+         </div>
+       </div>` : '');
+
+  /* ---------- lista de asistencia ---------- */
+  const asistencia = (ab && !cx)
+    ? `<div class="card">
+         <div class="card-head">
+           <h3 style="margin:0">Asistencia</h3>
+           <span class="pill pill--mute">${marcados()}/${c.t}</span>
+         </div>
+         <div class="list">
+           ${filasAsistencia().map(x => `
+             <div class="stu">
+               <div>
+                 <div class="item-title">${x.n}</div>
+                 <span class="pill ${x.st === 'voy' ? 'pill--ok' : x.st === 'no_voy' ? 'pill--no' : 'pill--mute'}"
+                   style="margin-top:4px">${x.st === 'voy' ? 'Voy' : x.st === 'no_voy' ? 'No voy' : 'Esperado'}</span>
+               </div>
+               <button class="mini-btn ${x.a ? 'on' : ''}" onclick="asis(${x.i})">
+                 ${x.a ? ic('check', 12) + ' Vino' : 'Marcar'}
+               </button>
+             </div>`).join('')}
+         </div>
+       </div>` : '';
+
+  const cabecera = `
+    <header class="appbar">
+      <div class="logo">liber<span>ate</span></div>
+      <button class="role-btn" onclick="setRole('alumno')">${ic('back')} VER COMO ALUMNO</button>
+    </header>`;
+
+  const hero = `
+    ${sceneMini()}
+    <div class="page-body">
+      <div class="card card--flat" style="margin-top:0">
+        <div class="row-between">
+          <span class="eyebrow">${DAYS_FULL[HOY]} · hoy</span>
+          <span class="pill ${cx ? 'pill--no' : ab ? 'pill--ok' : 'pill--mute'}">
+            ${cx ? 'Cancelada' : ab ? 'Llamada abierta' : 'Sin abrir'}</span>
+        </div>
+        <h1 style="margin-top:8px">19:30 <span class="sep">·</span> Plaza</h1>
+        <p class="sub" style="margin-top:4px">Cupo ${CUPO} · ${c.t} alumnos esperados</p>
+      </div>
+      ${bloqueLlamada}
+      ${bloqueClima}
+      ${asistencia}
+      <p class="note">Vista del profe · datos de ejemplo</p>
+    </div>`;
+
+  return `<div class="screen page--profe">${cabecera}${hero}</div>`;
+}
+
+/* ---------- helpers de profe ---------- */
+const marcados = () => S.al.filter(x => x.a).length + (S.meA ? 1 : 0);
+
+function filasAsistencia(){
+  const rows = [{ n:'Vos (alumno demo)', st:S.mi, a:S.meA, i:0 }];
+  S.al.forEach((x, i) => rows.push({ n:x.n, st:x.st, a:x.a, i:i+1 }));
+  return rows;
+}
+
+function abrirLlamada(){
+  S.llamada = 'abierta';
+  toast('Llamada abierta · push enviado');
+  render();
+}
+
+function cerrarLlamada(){
+  S.llamada = 'sin_abrir';
+  toast('Llamada cerrada');
+  render();
+}
+
+function toggleClima(){
+  S.clima = S.clima === 'a_confirmar' ? 'normal' : 'a_confirmar';
+  render();
+}
+
+function cancelarPorLluvia(){
+  if (confirm('¿Cancelar la clase por lluvia?')){
+    S.clima = 'cancelada';
+    toast('Push enviado a todos');
+    render();
+  }
+}
+
+function recordar(){ toast('Recordatorio enviado a ' + cnt().s + ' alumnos'); }
+
+function sim(){
+  S.al.forEach((x,i) => {
+    if (x.st === 'esperado' && Math.random() < .65){
+      x.st = Math.random() < .82 ? 'voy' : 'no_voy';
+      x.t = performance.now() + i*150;
+    }
+  });
+  render();
+}
+
+function asis(i){
+  if (i === 0) S.meA = !S.meA;
+  else S.al[i-1].a = !S.al[i-1].a;
+  render();
+}
+
+</script>
+<script>
+/* =========================================================
+   Liberate v4 · controlador: render, navegación y acciones
+   ========================================================= */
+
+const app = () => document.getElementById('app');
+
+function render(){
+  const shell = S.role === 'profe' ? profe()
+    : S.tab === 'hoy'    ? hoy()
+    : S.tab === 'lib'    ? liberate()
+    : S.tab === 'casa'   ? casa()
+    : perfil();
+
+  app().innerHTML = shell;
+  app().classList.remove('is-enter');
+  void app().offsetWidth;          // fuerza reflow para reiniciar la animación
+  app().classList.add('is-enter');
+
+  paintAvatars();
+  if (document.documentElement.classList.contains('static')) paintPlazaOnce();
+}
+
+/* ---------- navegación ---------- */
+function go(tab){
+  S.tab = tab;
+  clearInterval(S.iv);
+  S.run = null;
+  S.rut = null;
+  render();
+  window.scrollTo(0, 0);
+}
+
+function setRole(role){
+  S.role = role;
+  render();
+  window.scrollTo(0, 0);
+}
+
+/* ---------- responder el día ---------- */
+function mi(v){
+  S.mi = S.mi === v ? 'esperado' : v;
+  if (S.mi === 'voy') S.mit = performance.now();
+  toast(S.mi === 'esperado' ? 'Quitaste tu respuesta'
+      : S.mi === 'voy'      ? 'Confirmado · te esperamos'
+      : 'Avisaste que no vas');
+  render();
+}
+
+/* ---------- deep links (útiles para capturas y para compartir) ---------- */
+function applyDeepLink(){
+  const P = new URLSearchParams(location.search);
+  if (P.get('static')) document.documentElement.classList.add('static');
+
+  const preset = {
+    profe:   () => { S.role = 'profe'; },
+    abierta: () => { S.role = 'profe'; S.llamada = 'abierta'; S.mi = 'voy'; },
+    lluvia:  () => { S.clima = 'cancelada'; },
+    lib:     () => { S.tab = 'lib'; },
+    casa:    () => { S.tab = 'casa'; },
+    rutina:  () => { S.tab = 'casa'; S.rut = 1; },
+    timer:   () => { S.tab = 'casa'; S.rut = 0; S.run = { i:2, left:27, rest:false, done:0 }; },
+    perfil:  () => { S.tab = 'perfil'; }
+  };
+  const fn = preset[window.S_PRESET || P.get('s')];
+  if (fn) fn();
+}
+
+/* ---------- arranque ---------- */
+applyDeepLink();
+render();
+
+/* Mantiene viva la escena si la pestaña estuvo oculta */
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) render();
+});
+
+</script>
+</body>
+</html>
