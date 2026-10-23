@@ -1,0 +1,118 @@
+/* =========================================================
+   Liberate v4 · design tokens
+   Dirección: "verde editorial + glass" — papel verde suave,
+   tarjetas de vidrio, tipografía serif para títulos y
+   pixel-font sólo como firma de marca.
+   ========================================================= */
+
+:root{
+  /* superficies */
+  --bg:            #F2F6EC;
+  --bg-glow-1:     rgba(198,242,107,.42);
+  --bg-glow-2:     rgba(110,196,178,.20);
+  --surface:       #FFFFFF;
+  --surface-2:     #F6FAF1;
+  --surface-3:     #EDF3E5;
+  --glass:         rgba(255,255,255,.66);
+  --glass-strong:  rgba(255,255,255,.88);
+  --glass-brd:     rgba(255,255,255,.85);
+
+  /* tinta */
+  --ink:           #0D1710;
+  --ink-2:         #2C4135;
+  --muted:         #6A7D70;
+  --line:          rgba(13,23,16,.085);
+  --line-2:        rgba(13,23,16,.16);
+
+  /* marca */
+  --acc:           #1B7A44;
+  --acc-2:         #2AA45C;
+  --acc-ink:       #FFFFFF;
+  --acc-soft:      #DFF4E4;
+  --lime:          #C6F26B;
+
+  /* estados */
+  --ok:            #15803D;  --ok-bg:   #DCF5E3;
+  --no:            #BE3A2B;  --no-bg:   #FBE5E1;
+  --wa:            #A96A05;  --wa-bg:   #FCEFD3;
+  --wa-green:      #25A244;
+
+  /* sombras */
+  --sh-s: 0 1px 2px rgba(13,23,16,.05), 0 2px 6px rgba(13,23,16,.04);
+  --sh-m: 0 2px 6px rgba(13,23,16,.05), 0 14px 30px -14px rgba(13,23,16,.22);
+  --sh-l: 0 4px 12px rgba(13,23,16,.06), 0 28px 56px -24px rgba(13,23,16,.30);
+
+  /* radios */
+  --r-xs: 8px;
+  --r-s:  12px;
+  --r-m:  16px;
+  --r-l:  22px;
+  --r-xl: 30px;
+
+  /* tipografía */
+  --f-ui:   'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-disp: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --f-px:   'Press Start 2P', ui-monospace, monospace;
+
+  /* layout */
+  --maxw:   440px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --nav-h:  78px;
+}
+
+/* ---------- tema oscuro ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#080F0B;
+    --bg-glow-1: rgba(42,164,92,.14);
+    --bg-glow-2: rgba(60,140,160,.10);
+    --surface:#121D16;
+    --surface-2:#16241B;
+    --surface-3:#1B2C21;
+    --glass: rgba(24,38,29,.66);
+    --glass-strong: rgba(20,33,25,.90);
+    --glass-brd: rgba(255,255,255,.09);
+    --ink:#EDF5EA;
+    --ink-2:#C6D8C8;
+    --muted:#93A897;
+    --line:rgba(255,255,255,.09);
+    --line-2:rgba(255,255,255,.18);
+    --acc:#4FC97D;
+    --acc-2:#6BE096;
+    --acc-ink:#06120A;
+    --acc-soft:#13301D;
+    --ok:#5FD98A; --ok-bg:#12301F;
+    --no:#FF8474; --no-bg:#341A17;
+    --wa:#F0B955; --wa-bg:#33280F;
+    --sh-s: 0 1px 2px rgba(0,0,0,.5);
+    --sh-m: 0 2px 8px rgba(0,0,0,.45), 0 16px 34px -16px rgba(0,0,0,.7);
+    --sh-l: 0 4px 14px rgba(0,0,0,.5), 0 30px 60px -26px rgba(0,0,0,.85);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#080F0B;
+  --bg-glow-1: rgba(42,164,92,.14);
+  --bg-glow-2: rgba(60,140,160,.10);
+  --surface:#121D16;
+  --surface-2:#16241B;
+  --surface-3:#1B2C21;
+  --glass: rgba(24,38,29,.66);
+  --glass-strong: rgba(20,33,25,.90);
+  --glass-brd: rgba(255,255,255,.09);
+  --ink:#EDF5EA;
+  --ink-2:#C6D8C8;
+  --muted:#93A897;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.18);
+  --acc:#4FC97D;
+  --acc-2:#6BE096;
+  --acc-ink:#06120A;
+  --acc-soft:#13301D;
+  --ok:#5FD98A; --ok-bg:#12301F;
+  --no:#FF8474; --no-bg:#341A17;
+  --wa:#F0B955; --wa-bg:#33280F;
+  --sh-s: 0 1px 2px rgba(0,0,0,.5);
+  --sh-m: 0 2px 8px rgba(0,0,0,.45), 0 16px 34px -16px rgba(0,0,0,.7);
+  --sh-l: 0 4px 14px rgba(0,0,0,.5), 0 30px 60px -26px rgba(0,0,0,.85);
+}
